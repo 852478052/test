@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>news</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <style>
+        .odd{background-color: #cccccc}
+    </style>
+</head>
+<body >
+
+<table border="1">
+    <tr >
+        <td>cid</td>
+        <td>newsid</td>
+        <td>content</td>
+        <td>cauthor</td>
+        <td>ccreatedate</td>
+    </tr>
+    <tr th:each="n,nsStat:${page.getResult()}" th:class="${nsStat.odd}?'odd'">
+        <td th:text="${n.cid}">1</td>
+        <td th:text="${n.newsid}">1</td>
+        <td th:text="${n.content}">我笑了.</td>
+        <td th:text="${n.cauthor}">小明</td>
+        <td th:text="${#dates.format(n.ccreatedate,'yyyy-MM-dd')}"></td>
+    </tr>
+</table>
+<!--<input th:value="${list[0].createdate}"/>
+<input th:value="${#numbers.formatDecimal(12.345,3,2)}"/>-->
+<a th:href="@{/news(pageNo=1)}">首页</a>
+<a th:href="@{/news(pageNo=${page.getPageNum()-1})}">上一页</a>
+<a th:href="@{/news(pageNo=${page.getPageNum()+1})}">下一页</a>
+<a th:href="@{/news(pageNo=${page.getPages()})}">尾页</a>
+</body >
+</html>
